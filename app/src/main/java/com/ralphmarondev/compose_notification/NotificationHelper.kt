@@ -6,9 +6,11 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import androidx.annotation.RequiresPermission
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 
 object NotificationHelper {
 
@@ -32,8 +34,16 @@ object NotificationHelper {
         manager.createNotificationChannel(channel)
     }
 
-    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     fun simpleNotification(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("Simple Notification")
@@ -45,8 +55,16 @@ object NotificationHelper {
             .notify(1, notification)
     }
 
-    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     fun detailedNotification(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
         val moreDetails = "This is an example of detailed notification using BigTextStyle. " +
                 "You can display longer messages that expand when the notification is opened."
 
@@ -62,8 +80,16 @@ object NotificationHelper {
             .notify(2, notification)
     }
 
-    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     fun launchAppNotification(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
         val intent = Intent(context, MainActivity::class.java)
 
         val pendingIntent = PendingIntent.getActivity(
