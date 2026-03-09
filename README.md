@@ -19,12 +19,20 @@ future apps.
 
 ---
 
+## Screenshots 📸
+
+All app screens are combined into one image for simplicity, showing the **Home Screen**, **permission prompt**, and **example notifications**.
+
+![Compose Notification](screenshots/compose_notification.png)
+
+---
+
 ## How to Run ▶️
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ralphmarondev/compose-notification.git
+   git clone https://github.com/ralphmarondev/ComposeNotification.git
    ```
 2. Open the project in **Android Studio**
 3. Build & run on an **emulator or device** with **Android 28+**
